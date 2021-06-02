@@ -1,7 +1,6 @@
-#!/usr/bin/mono /usr/bin/rC
 function main():
 	str line >>""
-	Write "Welcome to rC Interpreter, rC V1.9.5
+	Write "Welcome to rC Interpreter, rC V1.9.5$line_break$"
 	while str:line==line:
 		Write "-> "
 		str line >>$readline
