@@ -1,0 +1,11 @@
+#!/usr/bin/mono /usr/bin/rC
+function main():
+	str line >>""
+	while str:line==line:
+		Write "-> "
+		str line >>$readline
+		$line$
+		newln
+
+main()
+exit()
