@@ -7,6 +7,7 @@ include "headers.h.rcode"
 Write "Welcome to rC Interpreter, rC:1.9.5$line_break$Shortcuts:$line_break$; -> indent break$line_break$$line_break$"
 str line >>""
 list(str) "known_nums"
+list(str) "known_str"
 while str:line==line:
 	Write "-> "
 	str line >>$readline
@@ -46,18 +47,20 @@ while str:line==line:
 		lsval(known_nums[__name_num])
 		if str:known_nums[__name_num]==line:
 			WriteNum {$known_nums[__name_num]$}
-	if str:line_first_space=="num":
+
+
+	if str:line_first_space=="str":
 		str name >>""
 		getSplit from:line; to:name; index:0; separator:" >>";
 		getSplit from:name; to:name; index:1; separator:" ";
 		num ind >>0
-		known_nums.IndexOf:name; to:ind;
+		known_str.IndexOf:name; to:ind;
 		if num:ind==-1:
-			str known_nums.Add >>name
-	for __name_num in range:known_nums.length:
-		lsval(known_nums[__name_num])
-		if str:known_nums[__name_num]==line:
-			WriteNum {$known_nums[__name_num]$}
+			str known_str.Add >>name
+	for __name_num_ in range:known_str.length:
+		lsval(known_str[__name_num_])
+		if str:known_str[__name_num_]==line:
+			WriteStr {$known_str[__name_num_]$}
 	if str:line_first_space=="function":
 		Write "Unfortunately, you can't declare functions on rCInterpreter yet..."
 	$final_line$
