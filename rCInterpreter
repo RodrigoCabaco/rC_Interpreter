@@ -8,6 +8,10 @@ Write "Welcome to rC Interpreter, rC:1.9.5$line_break$Shortcuts:$line_break$; ->
 str line >>""
 list(str) "known_nums"
 list(str) "known_str"
+list(str) "known_strLists"
+list(str) "known_numLists"
+str quote >>""
+str(quote+")")
 while str:line==line:
 	Write "-> "
 	str line >>$readline
@@ -60,7 +64,57 @@ while str:line==line:
 	for __name_num_ in range:known_str.length:
 		lsval(known_str[__name_num_])
 		if str:known_str[__name_num_]==line:
+			WriteStr {quote}
 			WriteStr {$known_str[__name_num_]$}
+			WriteStr {quote}
+	if str:line_first_space=="list(str)":
+		str name >>""
+		getSplit from:line; to:name; index:1; separator:quote;
+		num ind >>0
+		known_strLists.IndexOf:name; to:ind;
+		if num:ind==-1:
+			list(str) "known_strLists" >>["$name$"]
+	for __index__list_str in range:known_strLists.length:
+		lsval(known_strLists[__index__list_str])
+
+		if str:line==known_strLists[__index__list_str]:
+			num cur_len >>$known_strLists[__index__list_str]$.length
+			Write "["
+			for __k in range:cur_len:
+				str __curr >>"$known_strLists[__index__list_str]$"
+				lsval($__curr$[__k])
+				WriteStr {quote}
+				WriteStr {$__curr$[__k]}
+				WriteStr {quote}	
+				num cur___ >>cur_len
+				--cur___
+				if num:__k<cur___:
+					Write ","
+			Write "]"
+
+
+	if str:line_first_space=="list(num)":
+		str name >>""
+		getSplit from:line; to:name; index:1; separator:quote;
+		num ind >>0
+		known_numLists.IndexOf:name; to:ind;
+		if num:ind==-1:
+			list(str) "known_numLists" >>["$name$"]
+	for __index__list_str in range:known_numLists.length:
+		lsval(known_numLists[__index__list_str])
+
+		if str:line==known_numLists[__index__list_str]:
+			num cur_len >>$known_numLists[__index__list_str]$.length
+			Write "["
+			for __k in range:cur_len:
+				str __curr >>"$known_numLists[__index__list_str]$"
+				lnval($__curr$[__k])
+				WriteNum {$__curr$[__k]}
+				num cur___ >>cur_len
+				--cur___
+				if num:__k<cur___:
+					Write ","
+			Write "]"
 	if str:line_first_space=="function":
 		Write "Unfortunately, you can't declare functions on rCInterpreter yet..."
 	$final_line$
