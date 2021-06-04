@@ -1,11 +1,64 @@
-function main():
-	str line >>""
-	Write "Welcome to rC Interpreter, rC V1.9.5$line_break$"
-	while str:line==line:
-		Write "-> "
-		str line >>$readline
-		$line$
-		newln
+import split
+include "headers.h.rcode"
 
-main()
-exit()
+#TODO ADD STRING PRINT CAPABILITY
+#ADD FUNCTIONS
+#ADD LIST PRINT CAPABILITY
+Write "Welcome to rC Interpreter, rC:1.9.5$line_break$Shortcuts:$line_break$; -> indent break$line_break$$line_break$"
+str line >>""
+list(str) "known_nums"
+while str:line==line:
+	Write "-> "
+	str line >>$readline
+	str line_first_space >>""
+	str final_line >>line
+	getSplit from:line; to:line_first_space; index:0; separator:" ";
+	if str:line_first_space=="for":
+		str(final_line+->)
+		while str:line!=";":
+			Write "    "
+			str line >>$readline
+			str(final_line+line)
+			str(final_line+;;)
+	if str:line_first_space=="if":
+		str(final_line+->)
+		while str:line!=";":
+			Write "    "
+			str line >>$readline
+			str(final_line+line)
+			str(final_line+;;)
+	if str:line_first_space=="while":
+		str(final_line+->)
+		while str:line!=";":
+			Write "    "
+			str line >>$readline
+			str(final_line+line)
+			str(final_line+;;)
+	if str:line_first_space=="num":
+		str name >>""
+		getSplit from:line; to:name; index:0; separator:" >>";
+		getSplit from:name; to:name; index:1; separator:" ";
+		num ind >>0
+		known_nums.IndexOf:name; to:ind;
+		if num:ind==-1:
+			str known_nums.Add >>name
+	for __name_num in range:known_nums.length:
+		lsval(known_nums[__name_num])
+		if str:known_nums[__name_num]==line:
+			WriteNum {$known_nums[__name_num]$}
+	if str:line_first_space=="num":
+		str name >>""
+		getSplit from:line; to:name; index:0; separator:" >>";
+		getSplit from:name; to:name; index:1; separator:" ";
+		num ind >>0
+		known_nums.IndexOf:name; to:ind;
+		if num:ind==-1:
+			str known_nums.Add >>name
+	for __name_num in range:known_nums.length:
+		lsval(known_nums[__name_num])
+		if str:known_nums[__name_num]==line:
+			WriteNum {$known_nums[__name_num]$}
+	if str:line_first_space=="function":
+		Write "Unfortunately, you can't declare functions on rCInterpreter yet..."
+	$final_line$
+	newln
