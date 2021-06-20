@@ -1,5 +1,4 @@
 import split
-include "headers.h.rcode"
 
 #TODO ADD STRING PRINT CAPABILITY
 #ADD FUNCTIONS
@@ -116,6 +115,11 @@ while str:line==line:
 					Write ","
 			Write "]"
 	if str:line_first_space=="function":
-		Write "Unfortunately, you can't declare functions on rCInterpreter yet..."
+		str(final_line+->)
+		while str:line!=";":
+			Write "    "
+			str line >>$readline
+			str(final_line+line)
+			str(final_line+;;)
 	$final_line$
 	newln
